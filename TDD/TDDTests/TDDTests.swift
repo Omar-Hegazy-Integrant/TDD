@@ -9,8 +9,24 @@ import Testing
 
 struct TDDTests {
 
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+    @Test func `test multiplication`() async throws {
+        let five = Dollar(5)
+        var product = five.times(2)
+        #expect(product.amount == 10)
+        
+        product = five.times(3)
+        #expect(product.amount == 15)
     }
+}
 
+class Dollar {
+    private(set) var amount: Int
+    
+    init(_ amount: Int) {
+        self.amount = amount
+    }
+    
+    func times(_ multiplier: Int) -> Dollar {
+        Dollar(amount * multiplier)
+    }
 }
