@@ -14,9 +14,6 @@ struct TDDTests {
         five.times(2)
         #expect(five.amount == 10)
     }
-    
-    
-
 }
 
 class Dollar {
