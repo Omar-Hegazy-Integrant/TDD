@@ -19,8 +19,8 @@ struct TDDTests {
     }
 }
 
-class Dollar {
-    private(set) var amount: Int
+final class Dollar {
+    let amount: Int
     
     init(_ amount: Int) {
         self.amount = amount
