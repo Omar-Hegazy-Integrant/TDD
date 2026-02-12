@@ -27,4 +27,8 @@ struct TDDTests {
         product = five.times(3)
         #expect(product.amount == 15)
     }
+    
+    @Test func equality() async throws {
+        #expect(Dollar(5) == Dollar(5))
+    }
 }
