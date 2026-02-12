@@ -7,7 +7,7 @@
 
 
 final class Dollar: Equatable {
-    let amount: Int
+    private let amount: Int
     
     init(_ amount: Int) {
         self.amount = amount

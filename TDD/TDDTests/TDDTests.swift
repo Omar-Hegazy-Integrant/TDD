@@ -17,11 +17,8 @@ struct TDDTests {
         /// - Money rounding?
     @Test func `test multiplication`() async throws {
         let five = Dollar(5)
-        var product = five.times(2)
-        #expect(product.amount == 10)
-        
-        product = five.times(3)
-        #expect(product.amount == 15)
+        #expect(Dollar(10) == five.times(2))
+        #expect(Dollar(15) == five.times(3))
     }
     
     /// ~~- equlity
