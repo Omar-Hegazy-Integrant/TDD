@@ -15,17 +15,29 @@ class Money: Equatable {
     static func == (lhs: Money, rhs: Money) -> Bool {
         lhs.amount == rhs.amount && type(of: lhs) == type(of: rhs)
     }
+    
+    static func dollar(_ amount: Int) -> Money {
+        Dollar(amount)
+    }
+    
+    static func franc(_ amount: Int) -> Money {
+        Franc(amount)
+    }
+    
+    func times(_ multiplier: Int) -> Money {
+        fatalError("Subclass must implement this")
+    }
 }
 
 final class Dollar: Money {
-    func times(_ multiplier: Int) -> Dollar {
+    override func times(_ multiplier: Int) -> Money {
         Dollar(amount * multiplier)
     }
 }
 
 
 final class Franc: Money {
-    func times(_ multiplier: Int) -> Franc {
+    override func times(_ multiplier: Int) -> Money {
         Franc(amount * multiplier)
     }
 }

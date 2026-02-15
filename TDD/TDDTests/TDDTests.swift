@@ -15,38 +15,43 @@ struct TDDTests {
         /// ~~- $5 x 2 = $10~~
         /// ~~- Dollar side effects?~~
         /// - Money rounding?
-    @Test func `test multiplication`() async throws {
-        let five = Dollar(5)
-        #expect(Dollar(10) == five.times(2))
-        #expect(Dollar(15) == five.times(3))
-    }
-    
-    /// ~~- equlity
-    @Test func equality() async throws {
-        #expect(Dollar(5) == Dollar(5))
-        #expect(Dollar(5) != Dollar(6))
-    }
-    
-    /// ~~Make amount private
-    
+    /// ~~Make amount private~~
+    /// ~~- equlity~~
+    ///
     /// Equal null
     /// Equal object
+    /// ~~remove duplication~~
+    /// ~~common equals~~
+    /// common `times(:int)`
+    /// ~~compare francs to dollars~~
+    /// Currency
+    /// Delete test franc multiplication
+    
+    @Test func `test multiplication`() async throws {
+        let five = Money.dollar(5)
+        #expect(Money.dollar(10) == five.times(2))
+        #expect(Money.dollar(15) == five.times(3))
+    }
+    
+    
+    @Test func equality() async throws {
+        #expect(Money.dollar(5) == Money.dollar(5))
+        #expect(Money.dollar(5) != Money.dollar(6))
+    }
+    
+    
     
     /// 5 CHF x 2 = 10 CHF
     @Test func `test franc multiplication`() async throws {
-        let five = Franc(5)
-        #expect(Franc(10) == five.times(2))
-        #expect(Franc(15) == five.times(3))
+        let five = Money.franc(5)
+        #expect(Money.franc(10) == five.times(2))
+        #expect(Money.franc(15) == five.times(3))
     }
     
-    /// ~~remove duplication
-    
-    /// ~~common equals
-    
-    /// common `times(:int)`
+   
 
 
     @Test func `compare francs with dollars`() {
-        #expect(Dollar(5) != Franc(5))
+        #expect(Money.dollar(5) != Money.franc(5))
     }
  }
