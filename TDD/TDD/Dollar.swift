@@ -21,3 +21,20 @@ final class Dollar: Equatable {
         lhs.amount == rhs.amount
     }
 }
+
+
+final class Franc: Equatable {
+    private let amount: Int
+    
+    init(_ amount: Int) {
+        self.amount = amount
+    }
+    
+    func times(_ multiplier: Int) -> Franc {
+        Franc(amount * multiplier)
+    }
+
+    static func == (lhs: Franc, rhs: Franc) -> Bool {
+        lhs.amount == rhs.amount
+    }
+}
