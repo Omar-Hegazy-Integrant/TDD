@@ -7,9 +7,11 @@
 
 class Money: Equatable {
     let amount: Int
+    let currency: String
     
-    init(_ amount: Int) {
+    init(_ amount: Int, currency: String) {
         self.amount = amount
+        self.currency = currency
     }
     
     static func == (lhs: Money, rhs: Money) -> Bool {
@@ -17,11 +19,11 @@ class Money: Equatable {
     }
     
     static func dollar(_ amount: Int) -> Money {
-        Dollar(amount)
+        Dollar(amount, currency: "USD")
     }
     
     static func franc(_ amount: Int) -> Money {
-        Franc(amount)
+        Franc(amount, currency: "CHF")
     }
     
     func times(_ multiplier: Int) -> Money {
@@ -30,14 +32,24 @@ class Money: Equatable {
 }
 
 final class Dollar: Money {
+    
+    override init(_ amount: Int, currency: String) {
+        super.init(amount, currency: currency)
+    }
+    
     override func times(_ multiplier: Int) -> Money {
-        Dollar(amount * multiplier)
+        Money.dollar(amount * multiplier)
     }
 }
 
 
 final class Franc: Money {
+    
+    override init(_ amount: Int, currency: String) {
+        super.init(amount, currency: currency)
+    }
+    
     override func times(_ multiplier: Int) -> Money {
-        Franc(amount * multiplier)
+        Money.franc(amount * multiplier)
     }
 }
