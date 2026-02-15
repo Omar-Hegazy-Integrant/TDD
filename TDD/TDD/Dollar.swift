@@ -19,28 +19,14 @@ class Money: Equatable {
     }
     
     static func dollar(_ amount: Int) -> Money {
-        Dollar(amount, currency: "USD")
+        Money(amount, currency: "USD")
     }
     
     static func franc(_ amount: Int) -> Money {
-        Franc(amount, currency: "CHF")
+        Money(amount, currency: "CHF")
     }
     
     final func times(_ multiplier: Int) -> Money {
         Money(amount * multiplier, currency: currency)
-    }
-}
-
-final class Dollar: Money {
-    
-    override init(_ amount: Int, currency: String) {
-        super.init(amount, currency: currency)
-    }
-}
-
-final class Franc: Money {
-    
-    override init(_ amount: Int, currency: String) {
-        super.init(amount, currency: currency)
     }
 }

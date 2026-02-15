@@ -53,10 +53,4 @@ struct TDDTests {
         #expect("USD" == Money.dollar(1).currency)
         #expect("CHF" == Money.franc(1).currency)
     }
-    
-    @Test func `test different class equality`() {
-        let tenFrancs = Franc(10, currency: "CHF")
-        let tenMoney = Money(10, currency: "CHF")
-        #expect(tenMoney == tenFrancs)
-    }
  }
