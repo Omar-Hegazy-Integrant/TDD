@@ -39,7 +39,14 @@ struct TDDTests {
         #expect(Franc(15) == five.times(3))
     }
     
-    /// remove duplication
-    /// common equals
+    /// ~~remove duplication
+    
+    /// ~~common equals
+    
     /// common `times(:int)`
+
+
+    @Test func `compare francs with dollars`() {
+        #expect(Dollar(5) != Franc(5))
+    }
  }
