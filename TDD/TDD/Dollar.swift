@@ -15,7 +15,7 @@ class Money: Equatable {
     }
     
     static func == (lhs: Money, rhs: Money) -> Bool {
-        lhs.amount == rhs.amount && type(of: lhs) == type(of: rhs)
+        lhs.amount == rhs.amount && lhs.currency == rhs.currency
     }
     
     static func dollar(_ amount: Int) -> Money {
@@ -26,8 +26,8 @@ class Money: Equatable {
         Franc(amount, currency: "CHF")
     }
     
-    func times(_ multiplier: Int) -> Money {
-        fatalError("Subclass must implement this")
+    final func times(_ multiplier: Int) -> Money {
+        Money(amount * multiplier, currency: currency)
     }
 }
 
@@ -36,20 +36,11 @@ final class Dollar: Money {
     override init(_ amount: Int, currency: String) {
         super.init(amount, currency: currency)
     }
-    
-    override func times(_ multiplier: Int) -> Money {
-        Money.dollar(amount * multiplier)
-    }
 }
-
 
 final class Franc: Money {
     
     override init(_ amount: Int, currency: String) {
         super.init(amount, currency: currency)
-    }
-    
-    override func times(_ multiplier: Int) -> Money {
-        Money.franc(amount * multiplier)
     }
 }
