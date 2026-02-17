@@ -5,7 +5,7 @@
 //  Created by Omar Hegazy on 12/02/2026.
 //
 
-class Money: Equatable {
+class Money: Equatable, Expression {
     let amount: Int
     let currency: String
     
@@ -29,4 +29,23 @@ class Money: Equatable {
     final func times(_ multiplier: Int) -> Money {
         Money(amount * multiplier, currency: currency)
     }
+    
+    func plus(_ addend: Money) -> Expression {
+        Sum(augend: self, addend: addend)
+    }
+}
+
+protocol Expression {
+    // empty for now
+}
+
+class Bank {
+    func reduce(_ source: Expression, _ to: String) -> Money {
+        Money.dollar(10)
+    }
+}
+
+struct Sum: Expression {
+    let augend: Money
+    let addend: Money
 }

@@ -10,22 +10,6 @@ import Testing
 
 @MainActor
 struct TDDTests {
-
-     /// - $5 + 10 CHF = $10 if rate is 2:1
-        /// ~~- $5 x 2 = $10~~
-        /// ~~- Dollar side effects?~~
-        /// - Money rounding?
-    /// ~~Make amount private~~
-    /// ~~- equlity~~
-    ///
-    /// Equal null
-    /// Equal object
-    /// ~~remove duplication~~
-    /// ~~common equals~~
-    /// common `times(:int)`
-    /// ~~compare francs to dollars~~
-    /// Currency
-    /// Delete test franc multiplication
     
     @Test func `test multiplication`() async throws {
         let five = Money.dollar(5)
@@ -52,5 +36,21 @@ struct TDDTests {
     @Test func `test currency`() async throws {
         #expect("USD" == Money.dollar(1).currency)
         #expect("CHF" == Money.franc(1).currency)
+    }
+    
+    @Test func `test simple addition`() async throws {
+        let five = Money.dollar(5)
+        let sum = five.plus(five) // expression
+        let bank = Bank()
+        let reduced = bank.reduce(sum, "USD") // Banck reduces the expression
+        #expect(Money.dollar(10) == reduced)
+    }
+    
+    @Test func `test plus returns sum`() async throws {
+        let five = Money.dollar(10)
+        let result = five.plus(five)
+        let sum = try #require(result as? Sum)
+        #expect(five == sum.augend)
+        #expect(five == sum.addend)
     }
  }
