@@ -42,7 +42,7 @@ struct TDDTests {
         let five = Money.dollar(5)
         let sum = five.plus(five) // expression
         let bank = Bank()
-        let reduced = bank.reduce(sum, "USD") // Banck reduces the expression
+        let reduced = bank.reduce(sum, to: "USD") // Banck reduces the expression
         #expect(Money.dollar(10) == reduced)
     }
     
@@ -52,5 +52,12 @@ struct TDDTests {
         let sum = try #require(result as? Sum)
         #expect(five == sum.augend)
         #expect(five == sum.addend)
+    }
+    
+    @Test func `test reduce sum`() {
+        let sum = Sum(augend: .dollar(3), addend: .dollar(4))
+        let banck = Bank()
+        let result = banck.reduce(sum, to: "USD")
+        #expect(Money.dollar(7) == result)
     }
  }

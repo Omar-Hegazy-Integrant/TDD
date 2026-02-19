@@ -33,19 +33,28 @@ class Money: Equatable, Expression {
     func plus(_ addend: Money) -> Expression {
         Sum(augend: self, addend: addend)
     }
+    
+    func reduce(_ source: Expression, to currency: String) -> Money {
+        self
+    }
 }
 
 protocol Expression {
-    // empty for now
+    func reduce(to currency: String) -> Money
 }
 
 class Bank {
-    func reduce(_ source: Expression, _ to: String) -> Money {
-        Money.dollar(10)
+    func reduce(_ source: Expression, to currency: String) -> Money {
+        source.reduce(to: currency)
     }
 }
 
 struct Sum: Expression {
     let augend: Money
     let addend: Money
+    
+    func reduce(to currency: String) -> Money {
+        let amount = augend.amount + addend.amount
+        return Money(amount, currency: currency)
+    }
 }
