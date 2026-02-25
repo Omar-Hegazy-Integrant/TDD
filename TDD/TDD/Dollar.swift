@@ -34,18 +34,23 @@ class Money: Equatable, Expression {
         Sum(augend: self, addend: addend)
     }
     
-    func reduce(_ source: Expression, to currency: String) -> Money {
-        self
+    func reduce(_ bank: Bank, to newCurrency: String) -> Money {
+        let rate = bank.rate(from: currency, to: newCurrency)
+        return Money(amount / rate, currency: newCurrency)
     }
 }
 
 protocol Expression {
-    func reduce(to currency: String) -> Money
+    func reduce(_ bank: Bank, to currency: String) -> Money
 }
 
 class Bank {
-    func reduce(_ source: Expression, to currency: String) -> Money {
-        source.reduce(to: currency)
+    func reduce(_ source: Expression, to newCurrency: String) -> Money {
+        source.reduce(self, to: newCurrency)
+    }
+    
+    func rate(from: String, to: String) -> Int {
+        from == "CHF" && to == "USD" ? 2 : 1
     }
 }
 
@@ -53,8 +58,8 @@ struct Sum: Expression {
     let augend: Money
     let addend: Money
     
-    func reduce(to currency: String) -> Money {
+    func reduce(_ bank: Bank, to newCurrency: String) -> Money {
         let amount = augend.amount + addend.amount
-        return Money(amount, currency: currency)
+        return Money(amount, currency: newCurrency)
     }
 }

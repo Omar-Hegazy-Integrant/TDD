@@ -60,4 +60,10 @@ struct TDDTests {
         let result = banck.reduce(sum, to: "USD")
         #expect(Money.dollar(7) == result)
     }
+    
+    @Test func `Test reduce different currency`() async throws {
+        let bank = Bank()
+        let result = bank.reduce(Money.franc(2), to: "USD")
+        #expect(Money.dollar(1) == result)
+    }
  }
