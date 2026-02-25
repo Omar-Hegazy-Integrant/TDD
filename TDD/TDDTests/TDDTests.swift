@@ -66,4 +66,8 @@ struct TDDTests {
         let result = bank.reduce(Money.franc(2), to: "USD")
         #expect(Money.dollar(1) == result)
     }
+    
+    @Test func `test array equals`() {
+        #expect(Array(["abc"]) == Array(["abc"]))
+    }
  }

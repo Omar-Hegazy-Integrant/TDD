@@ -39,27 +39,3 @@ class Money: Equatable, Expression {
         return Money(amount / rate, currency: newCurrency)
     }
 }
-
-protocol Expression {
-    func reduce(_ bank: Bank, to currency: String) -> Money
-}
-
-class Bank {
-    func reduce(_ source: Expression, to newCurrency: String) -> Money {
-        source.reduce(self, to: newCurrency)
-    }
-    
-    func rate(from: String, to: String) -> Int {
-        from == "CHF" && to == "USD" ? 2 : 1
-    }
-}
-
-struct Sum: Expression {
-    let augend: Money
-    let addend: Money
-    
-    func reduce(_ bank: Bank, to newCurrency: String) -> Money {
-        let amount = augend.amount + addend.amount
-        return Money(amount, currency: newCurrency)
-    }
-}
